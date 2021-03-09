@@ -64,8 +64,6 @@ public class UsersController {
 		return "user/details";
 	}
 	
-	
-
 	@RequestMapping("/user/delete/{id}")
 	public String delete(@PathVariable Long id) {
 		usersService.deleteUser(id);
@@ -88,12 +86,5 @@ public class UsersController {
 		usersService.addUser(original);
 		return "redirect:/user/details/" + id;
 	}
-
 	
-	
-	
-
-
-
 }
-

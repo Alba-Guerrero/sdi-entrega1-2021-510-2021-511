@@ -21,12 +21,7 @@ public class UsersService {
 	*/
 	
 	@PostConstruct
-	public void init() {
-	}
-	
-	
-	
-	
+	public void init() {}
 
 	public List<User> getUsers() {
 		List<User> users = new ArrayList<User>();
