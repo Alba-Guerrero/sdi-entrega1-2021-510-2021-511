@@ -17,14 +17,10 @@
 			</div>
 			<button type="submit" class="btn btn-default">Buscar</button>
 		</form>
-			<button type="button" id="updateButton" class="btn btn-default">Actualizar</button>
-			
-		<div class="table-responsive">
-			<table class="table table-hover" th:fragment="tableUser"
-				id="tableUser">
+
 				<thead>
 					<tr>
-						
+						<th></th>
 						<th>Nombre</th>
 						<th>Apellidos</th>
 						<th>Email</th>
@@ -37,8 +33,6 @@
 				</thead>
 				<tbody>
 					<tr th:each="user : ${usersList}">
-					 <label>
-                    <input type="checkbox" th:checked="${flag}"/> Flag </label>
 						<td th:text="${user.nombre}">Nombre del alumno</td>
 						<td th:text="${user.apellido}">Apellidos del usuario</td>
 						<td th:text="${user.email}">ejmplo@ejemplo.com</td>

@@ -43,23 +43,24 @@
 
 	<div class="container">
 		<h2>Detalles del usuario</h2>
-		<div class="panel panel-default">
-			<div class="panel-heading">DNI</div>
-			<div class="panel-body" th:text="${user.dni}">28276</div>
-		</div>
+		
 		<div class="panel panel-default">
 			<div class="panel-heading">Nombre</div>
-			<div class="panel-body" th:text="${user.name}">
+			<div class="panel-body" th:text="${user.nombre}">
 				Ejercicio 1</div>
 		</div>
 		<div class="panel panel-default">
 			<div class="panel-heading">Apellidos</div>
-			<div class="panel-body" th:text="${user.lastName}">100</div>
+			<div class="panel-body" th:text="${user.apellido}">100</div>
+		</div>
+		
+		<div class="panel panel-default">
+			<div class="panel-heading">Email</div>
+			<div class="panel-body" th:text="${user.email}"></div>
 		</div>
 	</div>
 
 
-<div th:replace="fragments/pagination" />
 </body>
 
 </html>

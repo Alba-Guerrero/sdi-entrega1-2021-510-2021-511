@@ -25,7 +25,7 @@
 		</div>
 	</nav>
 	<div class="container">
-		<h2 th:value="${user.edit}"> </h2>
+		<h2 th:text="#{user.edit}"> </h2>
 		<form class="form-horizontal" method="post"
 			th:action="${'/user/edit/' + user.id}">
 			<div class="form-group">
