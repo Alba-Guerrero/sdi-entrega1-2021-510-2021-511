@@ -59,7 +59,7 @@ public class UsersController {
 	public String home(Model model) {
 		return "home";
 	}
-
+	
 	//	//VISTA SIN IMPLEMENTAR
 	//	@RequestMapping("/user/list")
 	//	public String getList(Model model, @RequestParam(value = "", required = false) String searchText) {
