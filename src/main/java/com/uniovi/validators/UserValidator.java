@@ -29,7 +29,6 @@ public class UserValidator implements Validator {
 			errors.rejectValue("email", "Error.email.coincidence");
 		}
 
-
 		if (user.getNombre().length() < 2 || user.getNombre().length() > 25) {
 			errors.rejectValue("nombre", "Error.name.length");
 		}
