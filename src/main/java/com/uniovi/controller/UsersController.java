@@ -37,6 +37,7 @@ public class UsersController {
 	@RequestMapping(value = "/signup", method = RequestMethod.POST)
 	public String signup(@Validated User user, BindingResult result) {
 		userValidator.validate(user, result);
+		
 		if(result.hasErrors())
 			return "signup";
 
