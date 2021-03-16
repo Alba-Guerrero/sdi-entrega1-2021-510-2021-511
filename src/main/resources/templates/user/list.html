@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head th:replace="fragments/head" />
+<body>
+	<!-- Barra de Navegación superior -->
+	<nav th:replace="fragments/nav" />
+	<div class="container">
+		<h2>Usuarios</h2>
+		<p>Los usuarios que actualmente figuran en el sistema son los
+			siguientes:</p>
+			
+			
+			<form class="navbar-form" action="/user/list">
+			<div class="form-group">
+				<input name="searchText" type="text" class="form-control" size="50"
+					placeholder="Buscar por descripción o nombre del usuario">
+			</div>
+			<button type="submit" class="btn btn-default">Buscar</button>
+		</form>
+
+				<thead>
+					<tr>
+						<th></th>
+						<th>Nombre</th>
+						<th>Apellidos</th>
+						<th>Email</th>
+						<th class="col-md-1"></th>
+						<th class="col-md-1"></th>
+						<th class="col-md-1"></th>
+						<th class="col-md-1"></th>
+						<th class="col-md-1"></th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="user : ${usersList}">
+						<td th:text="${user.nombre}">Nombre del alumno</td>
+						<td th:text="${user.apellido}">Apellidos del usuario</td>
+						<td th:text="${user.email}">ejmplo@ejemplo.com</td>
+						<td><a th:href="${'/user/details/' + user.id}">detalles</a></td>
+						<td><a th:href="${'/user/edit/' + user.id}">modificar</a></td>
+						<td><a th:href="${'/user/delete/' + user.id}">eliminar</a></td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+	
+</body>
+</html>

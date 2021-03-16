@@ -8,9 +8,7 @@
 		<p th:text="#{welcome.autenticado}">
 			<span sec:authentication="principal.username" th:inline="text"></span>
 		</p>
-		<p th:text="#{welcome.notas}"></p>
-		<div th:replace="fragments/tablaNotas"></div>
-	</div>
+
 	<footer th:replace="fragments/footer" />
 </body>
 </html>

@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head th:replace="fragments/head">
+<body>
+
+	<!-- Barra de Navegación superior -->
+	<nav class="navbar navbar-inverse">
+		<div class="container-fluid">
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle" data-toggle="collapse"
+					data-target="#myNavbar">
+					<span class="icon-bar"></span> <span class="icon-bar"></span> <span
+						class="icon-bar"></span>
+				</button>
+				<img src="/img/student-48.png" alt="logo" />
+			</div>
+
+			<ul class="nav navbar-nav navbar-right">
+				<li><a href="/registrarse" th:text="#{signup.message}"> <span
+						class="glyphicon glyphicon-user"></span></span> Registrate</a></li>
+				<li><a href="/identificarse" th:text="#{login.message}"> <span
+						class="glyphicon glyphicon-user"></span></span> Identifícate</a></li>
+			</ul>
+		</div>
+		</div>
+	</nav>
+	<div class="container">
+		<h2 th:text="#{user.edit}"> </h2>
+		<form class="form-horizontal" method="post"
+			th:action="${'/user/edit/' + user.id}">
+			<div class="form-group">
+				<label class="control-label col-sm-2" for="name" th:text="#{user.nombre}"></label>
+				<div class="col-sm-10">
+					<input type="text" class="form-control" name="nombre"
+						placeholder="Juan" required="true" />
+				</div>
+			</div>
+			
+			<div class="form-group">
+				<label class="control-label col-sm-2" for="lastName" th:text="#{user.apellido}"></label>
+				<div class="col-sm-10">
+					<input type="text" class="form-control" name="apellido"
+						placeholder="Ejemplo: PerÃ©z Almonte" required="true" />
+				</div>
+			</div>
+			
+			<div class="form-group">
+				<label class="control-label col-sm-2" for="lastName" th:text="#{user.email}"></label>
+				<div class="col-sm-10">
+					<input type="text" class="form-control" name="email"
+						placeholder="Ejemplo: ejemplo@ejemplo.com" required="true" />
+				</div>
+			</div>
+
+			<div class="form-group">
+				<label class="control-label col-sm-2" for="password" th:text="#{user.password}"></label>
+				<div class="col-sm-10">
+					<input type="password" class="form-control" name="password"
+						placeholder="Entre el Password" />
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="control-label col-sm-2" for="passwordConfirm" th:text="#{user.repeatPassword}"></label>
+				<div class="col-sm-10">
+					<input type="password" class="form-control" name="passwordConfirm"
+						placeholder="Repita el Password" />
+				</div>
+				
+			<div class="form-group">
+				<div class="col-sm-offset-2 col-sm-10">
+					<button type="submit" class="btn btn-primary" th:value="${send}"></button>
+				</div>
+			</div>
+		</form>
+	</div>
+
+
+
+</body>
+
+</html>
