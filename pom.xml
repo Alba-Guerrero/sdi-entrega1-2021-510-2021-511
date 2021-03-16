@@ -12,8 +12,8 @@
 	<groupId>com.uniovi</groupId>
 	<artifactId>sdi2021-511-spring</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>sdi-2021-511-spring</name>
-	<description>Aplicación para gestión de notas</description>
+	<name>sdi-entrega1-2021-510-2021-511</name>
+	<description>Aplicación My Wallapop</description>
 	<properties>
 		<java.version>1.8</java.version>
 	</properties>

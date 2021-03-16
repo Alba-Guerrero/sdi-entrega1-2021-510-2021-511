@@ -20,6 +20,7 @@ public class UserValidator implements Validator {
 	@Override
 	public void validate(Object target, Errors errors) {
 		User user = (User) target;
+		User userS=userService.getUserByEmail(user.getEmail());
 
 		//ValidationUtils.rejectIfEmptyOrWhitespace(errors, "score", "Error");
 		if (user.getEmail().length() < 2 || user.getEmail().length() > 25) {
@@ -28,7 +29,6 @@ public class UserValidator implements Validator {
 		if (userService.getUserByEmail(user.getEmail())!=null) {
 			errors.rejectValue("email", "Error.email.coincidence");
 		}
-
 
 		if (user.getNombre().length() < 2 || user.getNombre().length() > 25) {
 			errors.rejectValue("nombre", "Error.name.length");
@@ -42,6 +42,10 @@ public class UserValidator implements Validator {
 		}
 		if (!user.getPasswordConfirm().equals(user.getPassword())) {
 			errors.rejectValue("passwordConfirm", "Error.passwordConfirm.coincidence");
+		}
+		
+		if (userS.getEmail()=="admin@email.com"&& userS.getPassword()=="admin") {
+			errors.rejectValue("email", "Error.email.admin");
 		}
 
 	}
