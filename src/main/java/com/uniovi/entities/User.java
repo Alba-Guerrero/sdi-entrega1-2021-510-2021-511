@@ -30,8 +30,8 @@ public class User {
 	@Transient //propiedad que no se almacena e la tabla.
 	private String passwordConfirm;
 
-//	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
-//	private Set<Oferta> ofertas;
+	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+	private Set<Oferta> ofertas;
 	
 	public User() {
 		super();
