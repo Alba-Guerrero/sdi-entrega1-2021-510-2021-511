@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head th:replace="fragments/head" />
+<body>
+
+	<nav th:replace="fragments/nav" />
+
+
+
+	<div class="container">
+		<h2 th:text="#{oferta.detalles}"></h2>
+		
+		<div class="panel panel-default">
+			<div class="panel-heading" th:text="#{oferta.descripcion}"></div>
+			<div class="panel-body" th:text="${oferta.descripcion}">28276</div>
+		</div>
+		<div class="panel panel-default">
+			<div class="panel-heading" th:text="#{oferta.detalle}"> </div>
+			<div class="panel-body" th:text="${oferta.detalle}">
+				Ejercicio 1</div>
+		</div>
+		<div class="panel panel-default">
+			<div class="panel-heading" th:text="#{oferta.precio}" ></div>
+			<div class="panel-body" th:text="${oferta.precio}">100</div>
+		</div>
+	</div>
+
+
+</body>
+</html>
