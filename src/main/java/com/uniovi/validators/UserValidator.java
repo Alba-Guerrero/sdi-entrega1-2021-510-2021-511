@@ -36,7 +36,7 @@ public class UserValidator implements Validator {
 		}
 		
 		if (user.getApellido().length() < 2 || user.getApellido().length() > 50) {
-			errors.rejectValue("apellidos", "Error.lastName.length");
+			errors.rejectValue("apellido", "Error.lastName.length");
 		}
 		
 		if (user.getPassword().length() < 2 || user.getPassword().length() > 50) {

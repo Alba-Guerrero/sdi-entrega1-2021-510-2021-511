@@ -18,8 +18,8 @@ public class InsertSampleDataService {
 		User user1 = new User("Pedro", "Díaz", "pedro@diaz.com", "123456", "123456");
 		user1.setRole(rolesService.getRoles()[0]);
 		
-		User user2 = new User("Ana", "Perez", "ana@perez.com", "123456", "123456");
-		user1.setRole(rolesService.getRoles()[1]);
+		User user2 = new User("Admin", "Admin", "admin@email.com", "admin", "admin");
+		user2.setRole(rolesService.getRoles()[1]);
 
 		usersService.addUser(user1);
 		usersService.addUser(user2);

@@ -30,6 +30,12 @@
 						<li><a href="/user/add">Agregar usuario</a></li>
 						<li><a href="/user/list">Ver usuario</a></li>
 					</ul></li>
+
+				<li sec:authorize=""><a href="/oferta/add"
+					th:text="#{nav.ofertaNueva}"> <span
+						class="glyphicon glyphicon-user"></span>
+				</a></li>
+
 			</ul>
 			<ul class="nav navbar-nav navbar-right">
 				<li class="dropdown"><a id="btnLanguage" href="#"
@@ -48,7 +54,7 @@
 								style="border: 0; float: left; margin-right: 15px" /> <span
 								th:text="#{language.es}">Español</span>
 						</a></li>
-						
+
 					</ul></li>
 				<li sec:authorize=""><a href="/signup"
 					th:text="#{signup.message}"> <span
