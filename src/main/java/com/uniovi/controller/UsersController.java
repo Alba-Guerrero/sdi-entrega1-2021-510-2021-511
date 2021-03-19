@@ -44,7 +44,7 @@ public class UsersController {
 		user.setRole(rolesService.getRoles()[0]);
 
 		usersService.addUser(user);
-
+		
 		//Al registrarse inicia sesion automaticamente con el email y la contraseña
 		securityService.autoLogin(user.getEmail(), user.getPasswordConfirm());
 		return "redirect:home";

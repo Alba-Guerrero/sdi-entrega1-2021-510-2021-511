@@ -33,9 +33,7 @@
 						<td th:text="${oferta.descripcion}">Nombre del alumno</td>
 						<td th:text="${oferta.detalle}">Apellidos del usuario</td>
 						<td th:text="${oferta.precio}">ejmplo@ejemplo.com</td>
-						<td><a th:href="${'/oferta/details/' + oferta.id}">detalles</a></td>
-						<td><a th:href="${'/oferta/edit/' + oferta.id}">modificar</a></td>
-						<td><a th:href="${'/oferta/delete/' + oferta.id}">eliminar</a></td>
+						<td th:text="${find.comprar}"><a th:href="${'/oferta/buy/' + oferta.id}" ></a></td>
 					</tr>
 				</tbody>
 			</table>
@@ -43,4 +41,3 @@
 	</div>
 	
 </body>
-</html>
