@@ -17,7 +17,8 @@
 			</div>
 			<button type="submit" class="btn btn-default">Buscar</button>
 		</form>
-
+		
+		<table id="tableUsers">
 				<thead>
 					<tr>
 						<th></th>
@@ -33,6 +34,7 @@
 				</thead>
 				<tbody>
 					<tr th:each="user : ${usersList}">
+						<td> <input type="checkbox" id="cbox"> </td>
 						<td th:text="${user.nombre}">Nombre del alumno</td>
 						<td th:text="${user.apellido}">Apellidos del usuario</td>
 						<td th:text="${user.email}">ejmplo@ejemplo.com</td>
@@ -42,8 +44,8 @@
 					</tr>
 				</tbody>
 			</table>
+			
+			<button type="button" id="deleteButton" class="btn btn-default" th:text="#{boton.eliminar}"></button>
 		</div>
-	</div>
-	
 </body>
 </html>
