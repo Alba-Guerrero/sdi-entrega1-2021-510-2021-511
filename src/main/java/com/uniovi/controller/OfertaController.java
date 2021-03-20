@@ -1,8 +1,12 @@
 package com.uniovi.controller;
 
 import java.security.Principal;
+import java.util.LinkedList;
 
 import org.springframework.beans.factory.annotation.*;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -38,10 +42,16 @@ public class OfertaController {
 	}
 
 	@RequestMapping("/oferta/find")
-	public String findList(Model model, @RequestParam(value = "", required = false) String searchText) {
+	public String findList(Model model, Pageable pageable,  @RequestParam(value = "", required = false) String searchText) {
 		searchText = "%" + searchText + "%";
-		model.addAttribute("ofertasList", ofertasService.searchByDescription(searchText));
-
+		
+		Page<Oferta> ofertas = new PageImpl<Oferta>(new LinkedList<Oferta>());
+		if(searchText != null || !searchText.isEmpty())
+			ofertas =ofertasService.searchByDescription(pageable, searchText);
+		
+		model.addAttribute("ofertasList", ofertas.getContent());
+		model.addAttribute("page", ofertas);
+		
 		return "oferta/find";
 	}
 

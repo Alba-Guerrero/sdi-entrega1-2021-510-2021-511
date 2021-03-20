@@ -2,6 +2,8 @@ package com.uniovi.repository;
 
 import java.util.List;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 
@@ -13,5 +15,5 @@ public interface OfertasRepository extends CrudRepository<Oferta, Long>{
 	List<Oferta> searchById(long id);
 	
 	@Query("SELECT o FROM Oferta o WHERE (LOWER (o.descripcion)) LIKE LOWER(?1)")
-	List<Oferta> searchByDescription(String descripcion);
+	Page<Oferta> searchByDescription(Pageable pageable, String descripcion);
 }
