@@ -2,6 +2,8 @@ package com.uniovi.controller;
 
 import java.security.Principal;
 
+import javax.swing.JOptionPane;
+
 import org.springframework.beans.factory.annotation.*;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -59,6 +61,22 @@ public class OfertaController {
 		
 		ofertasService.addOferta(oferta);
 		return "redirect:/oferta/list";
+
+	}
+	
+	@RequestMapping("/oferta/buyList/{id}")
+	public String comprarOferta(Model modelo,@PathVariable Long id,Principal principal) {
+		
+		if(ofertasService.checkSaldo(principal.getName(), ofertasService.getOferta(id).getPrecio())){//Si tiene saldo
+			ofertasService.updateSaldo(ofertasService.getOferta(id).getPrecio(), principal.getName());
+			ofertasService.setComprado(id);
+			modelo.addAttribute("ofertasList", ofertasService.getOferta(id));
+			
+			return "oferta/buyList";
+		}
+		
+			
+		return "oferta/list";
 
 	}
 
