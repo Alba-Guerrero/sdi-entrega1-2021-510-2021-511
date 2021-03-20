@@ -34,6 +34,12 @@ public class OfertaService {
 		ofertasRepository.findAll().forEach(ofertas::add);
 		return ofertas;
 	}
+	
+	public List<Oferta> getOfertasComprador(String emailComprador) {
+		List<Oferta> ofertas = new ArrayList<Oferta>();
+		ofertas=ofertasRepository.searchByEmailOfertasCompradas(emailComprador);
+		return ofertas;
+	}
 
 	public Oferta getOferta(Long id) {
 		return ofertasRepository.findById(id).get();
@@ -77,7 +83,7 @@ public class OfertaService {
 		return ofertasRepository.searchById(id);
 	}
 	
-	public void setComprado(long id) {
-	 ofertasRepository.setComprado(id);
+	public void setComprado(String emailComprador,long id) {
+	 ofertasRepository.setComprado(emailComprador,id);
 	}
 }
