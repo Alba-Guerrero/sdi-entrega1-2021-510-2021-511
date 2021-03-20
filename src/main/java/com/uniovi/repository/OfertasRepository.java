@@ -17,3 +17,4 @@ public interface OfertasRepository extends CrudRepository<Oferta, Long>{
 	@Query("SELECT o FROM Oferta o WHERE (LOWER (o.descripcion)) LIKE LOWER(?1)")
 	Page<Oferta> searchByDescription(Pageable pageable, String descripcion);
 }
+
