@@ -11,15 +11,12 @@ import org.springframework.stereotype.Service;
 import com.uniovi.entities.Oferta;
 import com.uniovi.repository.OfertasRepository;
 
-
 @Service
 public class OfertaService {
-	
 	
 	@Autowired
 	private OfertasRepository ofertasRepository;
 
-	
 	@PostConstruct
 	public void init() {}
 
@@ -34,14 +31,15 @@ public class OfertaService {
 	}
 
 	public void addOferta(Oferta oferta) {
-		
 		ofertasRepository.save(oferta);
 	}
-	
-	
 
 	public void deleteOferta(Long id) {
 		ofertasRepository.deleteById(id);
+	}
+	
+	public List<Oferta> searchByDescription(String descripcion) {
+		return ofertasRepository.searchByDescription(descripcion);
 	}
 
 }

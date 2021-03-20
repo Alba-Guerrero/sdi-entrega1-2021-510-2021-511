@@ -27,9 +27,17 @@ public class OfertaController {
 	private OfertaValidator ofertaValidator;
 
 	@RequestMapping("/oferta/list")
-	public String getList(Model model, @RequestParam(value = "", required = false) String searchText) {
+	public String getList(Model model) {
 		model.addAttribute("ofertasList", ofertasService.getOfertas());
 		return "oferta/list";
+	}
+
+	@RequestMapping("/oferta/find")
+	public String findList(Model model, @RequestParam(value = "", required = false) String searchText) {
+		searchText = "%" + searchText + "%";
+		model.addAttribute("ofertasList", ofertasService.searchByDescription(searchText));
+
+		return "oferta/find";
 	}
 
 	@RequestMapping(value = "/oferta/add", method = RequestMethod.POST)
