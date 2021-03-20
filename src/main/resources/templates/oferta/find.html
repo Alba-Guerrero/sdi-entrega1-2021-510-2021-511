@@ -5,17 +5,15 @@
 	<!-- Barra de Navegación superior -->
 	<nav th:replace="fragments/nav" />
 	<div class="container">
-			
-			<form class="navbar-form" action="/oferta/find">
+		<form class="navbar-form" action="/oferta/find">
 			<div class="form-group">
 				<input name="searchText" type="text" class="form-control" size="50"
 					placeholder="Buscar por descripción o nombre del usuario">
 			</div>
 			<button type="submit" class="btn btn-default">Buscar</button>
 		</form>
-<div class="table-responsive">
-			<table class="table table-hover" 
-				id="tableOferta">
+		<div class="table-responsive">
+			<table class="table table-hover" id="tableOferta">
 				<thead>
 					<tr>
 						<th>Descripcion</th>
@@ -33,11 +31,12 @@
 						<td th:text="${oferta.descripcion}">Nombre del alumno</td>
 						<td th:text="${oferta.detalle}">Apellidos del usuario</td>
 						<td th:text="${oferta.precio}">ejmplo@ejemplo.com</td>
-						
+						<td th:if = "${!oferta.isComprada()}"><a th:href="${'/oferta/buyList/' + oferta.id}" th:text="#{oferta.comprar}"></a></td>
+						<td th:if = "${oferta.isComprada()}" th:text="#{oferta.vendida}"></td>
 					</tr>
 				</tbody>
 			</table>
 		</div>
 	</div>
-	
+
 </body>
