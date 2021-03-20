@@ -49,10 +49,6 @@ public class UserValidator implements Validator {
 		if (!user.getPasswordConfirm().equals(user.getPassword())) {
 			errors.rejectValue("passwordConfirm", "Error.passwordConfirm.coincidence");
 		}
-		
-		//if (userS.getEmail()=="admin@email.com"&& userS.getPassword()=="admin") {
-		//	errors.rejectValue("email", "Error.email.admin");
-	//	}
 
 	}
 
