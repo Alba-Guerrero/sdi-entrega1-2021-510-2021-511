@@ -37,6 +37,14 @@ public class Oferta {
 		return precio;
 	}
 
+	public String getEmailComprador() {
+		return emailComprador;
+	}
+
+	public void setEmailComprador(String emailComprador) {
+		this.emailComprador = emailComprador;
+	}
+
 	public Oferta() {
 		super();
 		this.fecha = new Date();

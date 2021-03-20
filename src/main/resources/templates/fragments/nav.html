@@ -33,12 +33,7 @@
 						<li><a href="/oferta/buyList" th:text="#{nav.ofertasCompradas}"></a></li>
 					</ul></li>
 					
-					<li id="menu" class="dropdown" sec:authorize="hasRole('ROLE_USER')">
 					
-					<ul class="user-info">
-						<li th:text="${#httpSession.getAttribute('saldo')}"></a></li>
-						<li th:text="${#httpSession.getAttribute('email')}"></a></li>
-					</ul></li>
 
 			</ul>
 			<ul class="nav navbar-nav navbar-right">
@@ -71,6 +66,14 @@
 				<li sec:authorize="isAuthenticated()"><a href="/logout"> <span
 						class="glyphicon glyphicon-log-out"></span> Desconectar
 				</a></li>
+				
+				<li id="menu" class="dropdown" sec:authorize="hasRole('ROLE_USER')">
+					
+					<ul class="user-info">
+						<li th:text="${#httpSession.getAttribute('email')}"></a></li>
+						<li th:text="${#httpSession.getAttribute('saldo')}"></a></li>
+						
+					</ul></li>
 			</ul>
 		</div>
 	</div>
