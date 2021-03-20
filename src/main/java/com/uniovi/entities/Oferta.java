@@ -19,7 +19,7 @@ public class Oferta {
 	private String detalle;
 	private Date fecha;
 	private boolean comprada;
-
+	private String emailComprador;
 	@ManyToOne
 	@JoinColumn(name = "user_id")
 	private User user;

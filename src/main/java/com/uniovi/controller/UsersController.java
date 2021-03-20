@@ -1,6 +1,9 @@
 package com.uniovi.controller;
 
+import java.security.Principal;
 import java.util.List;
+
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.*;
 import org.springframework.stereotype.Controller;
@@ -58,7 +61,11 @@ public class UsersController {
 	}
 
 	@RequestMapping(value = { "/home" }, method = RequestMethod.GET)
-	public String home(Model model) {
+	public String home(Model model,HttpSession session,Principal principal) {
+		String email = principal.getName();
+		User user = usersService.getUserByEmail(email);
+		session.setAttribute("saldo", user.getDinero());
+		session.setAttribute("email", principal.getName());
 		return "home";
 	}
 
