@@ -43,3 +43,4 @@ public interface OfertasRepository extends CrudRepository<Oferta, Long>{
 	@Query("SELECT o FROM Oferta o WHERE o.emailComprador = ?1")
 	List<Oferta> searchByEmailOfertasCompradas(String email);
 }
+
