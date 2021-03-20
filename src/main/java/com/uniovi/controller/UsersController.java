@@ -1,5 +1,7 @@
 package com.uniovi.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.*;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -106,6 +108,19 @@ public class UsersController {
 		User user = usersService.getUser(id);
 		model.addAttribute("user", user);
 		return "user/edit";
+	}
+	
+	
+
+	@RequestMapping(value = "/user/remove")
+	public String removeCheckbox(@RequestParam("idChecked") List<String> userId) {
+		
+	if(userId!=null)
+		for (int i = 0; i < userId.size(); i++) {
+			usersService.deleteUser(Long.parseLong(userId.get(i)));
+		}
+		
+		return "redirect:/user/list";
 	}
 
 	@RequestMapping(value = "/user/edit/{id}", method = RequestMethod.POST)
