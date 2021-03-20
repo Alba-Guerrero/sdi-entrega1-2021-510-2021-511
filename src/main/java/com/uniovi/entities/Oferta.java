@@ -18,40 +18,48 @@ public class Oferta {
 	private String descripcion;
 	private String detalle;
 	private Date fecha;
+	private boolean comprada;
 
 	@ManyToOne
 	@JoinColumn(name = "user_id")
 	private User user;
-	
-//	public User getUser() {
-//		return user;
-//	}
-//
-//	public void setUser(User user) {
-//		this.user = user;
-//	}
-	
-	
+
+	//	public User getUser() {
+	//		return user;
+	//	}
+	//
+	//	public void setUser(User user) {
+	//		this.user = user;
+	//	}
+
 
 	public double getPrecio() {
 		return precio;
 	}
 
 	public Oferta() {
-	super();
-}
+		super();
+		this.fecha = new Date();
+	}
 
 	public Oferta(Long id, double precio, String descripcion, String detalle, User user) {
-	super();
-	this.id = id;
-	this.precio = precio;
-	this.descripcion = descripcion;
-	this.detalle = detalle;
-	this.fecha = new Date();
-	this.user = user;
-}
-	
-	
+		super();
+		this.id = id;
+		this.precio = precio;
+		this.descripcion = descripcion;
+		this.detalle = detalle;
+		this.fecha = new Date();
+		this.user = user;
+		this.comprada = false;
+	}
+
+	public boolean isComprada() {
+		return comprada;
+	}
+
+	public void setComprada(boolean comprada) {
+		this.comprada = comprada;
+	}
 
 	public Long getId() {
 		return id;

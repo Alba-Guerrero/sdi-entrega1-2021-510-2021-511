@@ -1,5 +1,7 @@
 package com.uniovi.controller;
 
+import java.security.Principal;
+
 import org.springframework.beans.factory.annotation.*;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -27,8 +29,11 @@ public class OfertaController {
 	private OfertaValidator ofertaValidator;
 
 	@RequestMapping("/oferta/list")
-	public String getList(Model model) {
-		model.addAttribute("ofertasList", ofertasService.getOfertas());
+	public String getList(Model model, Principal principal) {
+		String email = principal.getName();
+		User user = usersService.getUserByEmail(email);
+		
+		model.addAttribute("ofertasList", ofertasService.getOfertasFromUser(user.getId()));
 		return "oferta/list";
 	}
 
@@ -41,19 +46,24 @@ public class OfertaController {
 	}
 
 	@RequestMapping(value = "/oferta/add", method = RequestMethod.POST)
-	public String addUser(@Validated Oferta oferta, BindingResult result) {
+	public String addUser(@Validated Oferta oferta, BindingResult result, Principal principal) {
 		ofertaValidator.validate(oferta, result);
+		
 		if (result.hasErrors()) {
-
 			return "oferta/add";
 		}
+		
+		String email = principal.getName();
+		User user = usersService.getUserByEmail(email);
+		oferta.setUser(user);
+		
 		ofertasService.addOferta(oferta);
 		return "redirect:/oferta/list";
 
 	}
 
 	@RequestMapping(value = "/oferta/add", method = RequestMethod.GET)
-	public String addOferta(Model model) {
+	public String addOferta(Model model, Principal principal) {
 		model.addAttribute("oferta", new Oferta());
 		return "oferta/add";
 	}

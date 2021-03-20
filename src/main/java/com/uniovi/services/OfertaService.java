@@ -42,4 +42,7 @@ public class OfertaService {
 		return ofertasRepository.searchByDescription(descripcion);
 	}
 
+	public List<Oferta> getOfertasFromUser(long id) {
+		return ofertasRepository.searchById(id);
+	}
 }
