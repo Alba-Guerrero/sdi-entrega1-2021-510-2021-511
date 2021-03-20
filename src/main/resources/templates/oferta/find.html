@@ -6,7 +6,7 @@
 	<nav th:replace="fragments/nav" />
 	<div class="container">
 			
-			<form class="navbar-form" action="/oferta/list">
+			<form class="navbar-form" action="/oferta/find">
 			<div class="form-group">
 				<input name="searchText" type="text" class="form-control" size="50"
 					placeholder="Buscar por descripción o nombre del usuario">
@@ -33,7 +33,7 @@
 						<td th:text="${oferta.descripcion}">Nombre del alumno</td>
 						<td th:text="${oferta.detalle}">Apellidos del usuario</td>
 						<td th:text="${oferta.precio}">ejmplo@ejemplo.com</td>
-						<td th:text="${find.comprar}"><a th:href="${'/oferta/buy/' + oferta.id}" ></a></td>
+						
 					</tr>
 				</tbody>
 			</table>
