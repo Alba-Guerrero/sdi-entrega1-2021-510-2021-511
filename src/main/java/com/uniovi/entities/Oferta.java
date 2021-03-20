@@ -19,7 +19,7 @@ public class Oferta {
 	private String detalle;
 	private Date fecha;
 	private boolean comprada;
-
+	private String emailComprador;
 	@ManyToOne
 	@JoinColumn(name = "user_id")
 	private User user;
@@ -35,6 +35,14 @@ public class Oferta {
 
 	public double getPrecio() {
 		return precio;
+	}
+
+	public String getEmailComprador() {
+		return emailComprador;
+	}
+
+	public void setEmailComprador(String emailComprador) {
+		this.emailComprador = emailComprador;
 	}
 
 	public Oferta() {

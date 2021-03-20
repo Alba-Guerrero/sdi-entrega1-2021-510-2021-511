@@ -3,6 +3,7 @@ package com.uniovi.controller;
 import java.security.Principal;
 import java.util.LinkedList;
 
+
 import org.springframework.beans.factory.annotation.*;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
@@ -12,6 +13,8 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
 import com.uniovi.entities.*;
 import com.uniovi.services.OfertaService;
 import com.uniovi.services.RolesService;
@@ -68,6 +71,23 @@ public class OfertaController {
 		oferta.setUser(user);
 		
 		ofertasService.addOferta(oferta);
+		return "redirect:/oferta/list";
+
+	}
+	
+	@RequestMapping("/oferta/buyList/{id}")
+	public String comprarOferta(Model modelo,@PathVariable Long id,Principal principal,RedirectAttributes rm) {
+		
+		if(ofertasService.checkSaldo(principal.getName(), ofertasService.getOferta(id).getPrecio())){//Si tiene saldo
+			ofertasService.updateSaldo(ofertasService.getOferta(id).getPrecio(), principal.getName());
+			ofertasService.setComprado(id);
+			modelo.addAttribute("ofertasList", ofertasService.getOferta(id));
+			
+			return "oferta/buyList";
+		}
+		else
+			rm.addFlashAttribute("message", "No tiene saldo suficiente");
+			//modelo.addAttribute("error", );
 		return "redirect:/oferta/list";
 
 	}

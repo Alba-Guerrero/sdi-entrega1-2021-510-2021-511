@@ -27,6 +27,9 @@ public class UserValidator implements Validator {
 		if (user.getEmail().length() < 2 || user.getEmail().length() > 25) {
 			errors.rejectValue("email", "Error.email.length");
 		}
+		if (!user.getEmail().contains("@")) {
+			errors.rejectValue("email", "Error.email.arroba");
+		}
 		if (userService.getUserByEmail(user.getEmail()) != null) {
 			errors.rejectValue("email", "Error.email.coincidence");
 		}
