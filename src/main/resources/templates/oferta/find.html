@@ -31,12 +31,15 @@
 						<td th:text="${oferta.descripcion}">Nombre del alumno</td>
 						<td th:text="${oferta.detalle}">Apellidos del usuario</td>
 						<td th:text="${oferta.precio}">ejmplo@ejemplo.com</td>
-						<td th:if = "${!oferta.isComprada()}"><a th:href="${'/oferta/buyList/' + oferta.id}" th:text="#{oferta.comprar}"></a></td>
-						<td th:if = "${oferta.isComprada()}" th:text="#{oferta.vendida}"></td>
+						<td th:if="${!oferta.isComprada()}"><a
+							th:href="${'/oferta/buyList/' + oferta.id}"
+							th:text="#{oferta.comprar}"></a></td>
+						<td th:if="${oferta.isComprada()}" th:text="#{oferta.vendida}"></td>
 					</tr>
 				</tbody>
 			</table>
 		</div>
+		<footer th:replace="fragments/pagination" />
 	</div>
 
 </body>
