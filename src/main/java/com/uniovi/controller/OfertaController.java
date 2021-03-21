@@ -45,7 +45,7 @@ public class OfertaController {
 	}
 
 	@RequestMapping("/oferta/find")
-	public String findList(Model model, Pageable pageable,  @RequestParam(value = "", required = false) String searchText) {
+	public String findList(Model model, Pageable pageable,Principal principal,  @RequestParam(value = "", required = false) String searchText) {
 		searchText = "%" + searchText + "%";
 		
 		Page<Oferta> ofertas = new PageImpl<Oferta>(new LinkedList<Oferta>());
@@ -54,6 +54,7 @@ public class OfertaController {
 		
 		model.addAttribute("ofertasList", ofertas.getContent());
 		model.addAttribute("page", ofertas);
+		httpsession.setAttribute("saldo",usersService.getUserByEmail(principal.getName()).getDinero());
 		
 		return "oferta/find";
 	}
@@ -94,7 +95,7 @@ public class OfertaController {
 			
 			
 			
-			return "oferta/buyList";
+			return "redirect:/oferta/buyList";
 		}
 		else
 			modelo.addAttribute("error", error);
