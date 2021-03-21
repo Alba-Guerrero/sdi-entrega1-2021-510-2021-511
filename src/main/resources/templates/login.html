@@ -25,6 +25,7 @@
 				<div class="col-sm-offset-2 col-sm-10">
 					<button type="submit" class="btn btn-primary" th:text="#{send}"></button>
 				</div>
+				<div class="alert alert-danger" th:if="${error != null}" th:text="#{login.error}"></div>
 			</div>
 			
 			<input type="hidden" name="${_csrf.parameterName}"

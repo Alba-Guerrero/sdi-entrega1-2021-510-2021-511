@@ -35,6 +35,7 @@
 							th:href="${'/oferta/buyList/' + oferta.id}"
 							th:text="#{oferta.comprar}"></a></td>
 						<td th:if="${oferta.isComprada()}" th:text="#{oferta.vendida}"></td>
+						<td th:if="${#httpSession.getAttribute('saldo') < oferta.precio}"  th:text="#{oferta.noSaldo}"></td>
 						
 					</tr>
 				</tbody>

@@ -52,7 +52,7 @@ public class OfertaController {
 		
 		Page<Oferta> ofertas = new PageImpl<Oferta>(new LinkedList<Oferta>());
 		if(searchText != null || !searchText.isEmpty())
-			ofertas =ofertasService.searchByDescription(pageable, searchText);
+			ofertas =ofertasService.searchByDescription(pageable, searchText,httpsession.getAttribute("email").toString());
 		
 		model.addAttribute("ofertasList", ofertas.getContent());
 		model.addAttribute("page", ofertas);
@@ -85,7 +85,7 @@ public class OfertaController {
 	}
 	
 	@RequestMapping("/oferta/buyList/{id}")
-	public String comprarOferta(Model modelo,@PathVariable Long id,Principal principal) {
+	public String comprarOferta(Model modelo,@PathVariable Long id,Principal principal,@RequestParam(value = "", required = false) String error) {
 		
 		if(ofertasService.checkSaldo(principal.getName(), ofertasService.getOferta(id).getPrecio())){//Si tiene saldo
 			ofertasService.updateSaldo(ofertasService.getOferta(id).getPrecio(), principal.getName());
@@ -96,8 +96,10 @@ public class OfertaController {
 			return "oferta/buyList";
 		}
 		else
+			modelo.addAttribute("error", error);
+		
 			
-		return "redirect:/oferta/list";
+		return "redirect:/oferta/find";
 
 	}
 

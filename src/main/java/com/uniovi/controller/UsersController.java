@@ -55,8 +55,14 @@ public class UsersController {
 		return "redirect:home";
 	}
 
-	@RequestMapping(value = "/login", method = RequestMethod.GET)
+	/*@RequestMapping(value = "/login", method = RequestMethod.GET)
 	public String login(Model model) {
+		return "login";
+	}*/
+	
+	@RequestMapping(value = "/login", method = RequestMethod.GET)
+	public String loginHandler(Model model,@RequestParam(value = "error", required = false) String error) {
+		model.addAttribute("error", error);
 		return "login";
 	}
 

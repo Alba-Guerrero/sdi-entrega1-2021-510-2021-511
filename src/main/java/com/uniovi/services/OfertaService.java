@@ -58,9 +58,9 @@ public class OfertaService {
 	}
 	
 
-	public Page<Oferta> searchByDescription(Pageable pageable, String descripcion) {
+	public Page<Oferta> searchByDescription(Pageable pageable, String descripcion,String email) {
 		Page<Oferta> ofertas = new PageImpl<Oferta>(new LinkedList<Oferta>());
-		ofertas = ofertasRepository.searchByDescription(pageable, descripcion);
+		ofertas = ofertasRepository.searchByDescription(pageable, descripcion,email);
 		
 		return ofertas;
 	}
