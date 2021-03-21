@@ -5,8 +5,13 @@
 
 <body>
 	<nav th:replace="fragments/nav" />
+	
 	<div class="container" style="text-align: center">
 		<h2 th:text="#{welcome.message}"></h2>
+		<h3 th:text="#{welcome.autenticado}"></h3>
+		<p >
+			<span sec:authentication="principal.username" th:inline="text">
+		</p>
 	</div>
 	<footer th:replace="fragments/footer" />
 </body>

@@ -3,6 +3,7 @@ package com.uniovi.controller;
 import java.security.Principal;
 import java.util.LinkedList;
 
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.*;
 import org.springframework.data.domain.Page;
@@ -28,7 +29,8 @@ public class OfertaController {
 
 	@Autowired
 	private OfertaService ofertasService ;
-
+	@Autowired
+	private HttpSession httpsession;
 	@Autowired
 	private UsersService usersService;
 
@@ -57,6 +59,13 @@ public class OfertaController {
 		
 		return "oferta/find";
 	}
+	
+	@RequestMapping("/oferta/buyList")
+	public String getListComprados(Model model, Principal principal) {
+
+		model.addAttribute("ofertasBuy", ofertasService.getOfertasComprador(principal.getName()));
+		return "oferta/buyList";
+	}
 
 	@RequestMapping(value = "/oferta/add", method = RequestMethod.POST)
 	public String addUser(@Validated Oferta oferta, BindingResult result, Principal principal) {
@@ -76,18 +85,18 @@ public class OfertaController {
 	}
 	
 	@RequestMapping("/oferta/buyList/{id}")
-	public String comprarOferta(Model modelo,@PathVariable Long id,Principal principal,RedirectAttributes rm) {
+	public String comprarOferta(Model modelo,@PathVariable Long id,Principal principal) {
 		
 		if(ofertasService.checkSaldo(principal.getName(), ofertasService.getOferta(id).getPrecio())){//Si tiene saldo
 			ofertasService.updateSaldo(ofertasService.getOferta(id).getPrecio(), principal.getName());
-			ofertasService.setComprado(id);
-			modelo.addAttribute("ofertasList", ofertasService.getOferta(id));
+			ofertasService.setComprado(principal.getName(),id);
+			httpsession.setAttribute("saldo",usersService.getUserByEmail(principal.getName()).getDinero());
+			modelo.addAttribute("ofertasBuy", ofertasService.getOfertasComprador(principal.getName()));
 			
 			return "oferta/buyList";
 		}
 		else
-			rm.addFlashAttribute("message", "No tiene saldo suficiente");
-			//modelo.addAttribute("error", );
+			
 		return "redirect:/oferta/list";
 
 	}

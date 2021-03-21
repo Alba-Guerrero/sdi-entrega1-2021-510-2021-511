@@ -9,9 +9,10 @@
 			<table class="table table-hover" id="tableOfertaCompradas">
 				<thead>
 					<tr>
-						<th>Descripcion</th>
-						<th>Detalle</th>
-						<th>Precio</th>
+						<th th:text="#{oferta.descripcion}"></th>
+						<th th:text="#{oferta.detalle}"></th>
+						<th th:text="#{oferta.precio}"></th>
+						<th th:text="#{oferta.email}"></th>
 						<th class="col-md-1"></th>
 						<th class="col-md-1"></th>
 						<th class="col-md-1"></th>
@@ -20,18 +21,16 @@
 					</tr>
 				</thead>
 				<tbody>
-					<tr th:each="oferta : ${ofertasList}">
-						<td th:text="${oferta.descripcion}">Nombre del alumno</td>
-						<td th:text="${oferta.detalle}">Apellidos del usuario</td>
-						<td th:text="${oferta.precio}">ejmplo@ejemplo.com</td>
-						<td><a th:href="${'/oferta/details/' + oferta.id}">detalles</a></td>
-						<td><a th:href="${'/oferta/edit/' + oferta.id}">modificar</a></td>
-						<td><a th:href="${'/oferta/delete/' + oferta.id}">eliminar</a></td>
+					<tr th:each="oferta : ${ofertasBuy}">
+						<td th:text="${oferta.descripcion}"></td>
+						<td th:text="${oferta.detalle}"></td>
+						<td th:text="${oferta.precio}"></td>
+						<td th:text="${oferta.user.email}"></td>
 					</tr>
 				</tbody>
 			</table>
 		</div>
 	</div>
-
+<footer th:replace="fragments/footer" />
 </body>
 </html>

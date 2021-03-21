@@ -15,8 +15,8 @@
 
 				<li id="users-menu" class="dropdown"
 					sec:authorize="hasRole('ROLE_ADMIN')"><a
-					 class="dropdpwn-toggle" data-toggle="dropdown" href="#">Gestion de usuarios<span class="caret"></span>
-				</a>
+					 class="dropdpwn-toggle" data-toggle="dropdown" href="#" th:text="#{nav.gestion}">Gestion de usuarios<span class="caret"></span>
+
 					<ul id="opcionesUser" class="dropdown-menu">
 						<li><a href="/user/add">Agregar usuario</a></li>
 						<li id="verUsuarios" ><a href="/user/list">Ver usuario</a></li>

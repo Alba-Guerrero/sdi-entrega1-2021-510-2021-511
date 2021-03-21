@@ -30,14 +30,17 @@ public interface OfertasRepository extends CrudRepository<Oferta, Long>{
 	
 	@Modifying
 	@Transactional
-	@Query("UPDATE  Oferta  SET  comprada=true where id=?1")
-	void setComprado(long id);
+	@Query("UPDATE  Oferta  SET  comprada=true, emailComprador= ?1 where id=?2")
+	void setComprado(String emailComprador,long id);
 	
 	//@Query("Select u form oferta where ")
 	//User findUserByEmail(String email);
 	
 	@Query("Select u  from User u  where u.email=?1 and u.dinero>=?2")
 	User checkSaldo(String email,Double saldo);
-
+	
+	
+	@Query("SELECT o FROM Oferta o WHERE o.emailComprador = ?1")
+	List<Oferta> searchByEmailOfertasCompradas(String email);
 }
 
