@@ -272,7 +272,7 @@ public class MyWallapopTest {
 	public void Prueba8() {
 		PO_HomeView.clickOption(driver, "login", "class", "btn btn-primary");
 		PO_LoginView.fillForm(driver, "pedro@email.com" , "123456789" );
-		PO_View.checkElement(driver, "h2", "Identifícate");
+		PO_View.checkElement(driver, "text", "Se ha producido un error en el intento de inicio de sesion");
 	}
 
 	/**
@@ -282,7 +282,7 @@ public class MyWallapopTest {
 	public void Prueba9() {
 		PO_HomeView.clickOption(driver, "login", "class", "btn btn-primary");
 		PO_LoginView.fillForm(driver, "pepe@email.com" , "123456" );
-		PO_View.checkElement(driver, "h2", "Identifícate");
+		PO_View.checkElement(driver, "text", "Se ha producido un error en el intento de inicio de sesion");
 	}
 
 	/**
@@ -674,6 +674,7 @@ public class MyWallapopTest {
 	 */
 	@Test
 	public void Prueba27() {
+		PO_RegisterView.checkKey(driver, "welcome.message", PO_Properties.getSPANISH());
 		PO_HomeView.changeIdiom(driver, "btnEnglish");
 		PO_RegisterView.checkKey(driver, "welcome.message", PO_Properties.getENGLISH());
 		PO_HomeView.changeIdiom(driver, "btnSpanish");
@@ -681,6 +682,7 @@ public class MyWallapopTest {
 		
 		PO_HomeView.clickOption(driver, "login", "class", "btn btn-primary");
 		
+		PO_RegisterView.checkKey(driver, "user.email", PO_Properties.getSPANISH());
 		PO_HomeView.changeIdiom(driver, "btnEnglish");
 		PO_RegisterView.checkKey(driver, "user.email", PO_Properties.getENGLISH());
 		PO_HomeView.changeIdiom(driver, "btnSpanish");
@@ -688,6 +690,7 @@ public class MyWallapopTest {
 		
 		PO_LoginView.fillForm(driver, "ana@email.com", "123456" );
 		
+		PO_RegisterView.checkKey(driver, "welcome.autenticado", PO_Properties.getSPANISH());
 		PO_HomeView.changeIdiom(driver, "btnEnglish");
 		PO_RegisterView.checkKey(driver, "welcome.autenticado", PO_Properties.getENGLISH());
 		PO_HomeView.changeIdiom(driver, "btnSpanish");
@@ -699,6 +702,7 @@ public class MyWallapopTest {
 		elementos = PO_View.checkElement(driver, "free", "//a[contains(@href, '/oferta/buyList')]");
 		elementos.get(0).click();
 		
+		PO_RegisterView.checkKey(driver, "oferta.descripcion", PO_Properties.getSPANISH());
 		PO_HomeView.changeIdiom(driver, "btnEnglish");
 		PO_RegisterView.checkKey(driver, "oferta.descripcion", PO_Properties.getENGLISH());
 		PO_HomeView.changeIdiom(driver, "btnSpanish");
