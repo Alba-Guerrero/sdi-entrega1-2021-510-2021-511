@@ -14,20 +14,20 @@
 
 			<div class="form-group">
 				<label class="control-label col-sm-2" for="description"
-					th:text="#{oferta.descripcion}">Descripcion:</label>
+					th:text="#{oferta.descripcion}"></label>
 				<div class="col-sm-10">
 					<input type="text" class="form-control" name="descripcion"
-						placeholder="Falda verde " required="true" /> <span
+						th:placeholder="#{oferta.placeholder.descripcion}" required="true" /> <span
 						class="text-danger" th:if="${#fields.hasErrors('descripcion')}"
 						th:errors="*{descripcion}" />
 				</div>
 			</div>
 			<div class="form-group">
 				<label class="control-label col-sm-2" for="pwd"
-					th:text="#{oferta.detalle}">Detalle:</label>
+					th:text="#{oferta.detalle}"></label>
 				<div class="col-sm-10">
 					<input type="text" class="form-control" name="detalle"
-						placeholder="Falda verde de seda en talla m" required="true" /> <span
+						th:placeholder="#{oferta.placeholder.detalle}" required="true" /> <span
 						class="text-danger" th:if="${#fields.hasErrors('detalle')}"
 						th:errors="*{detalle}" />
 				</div>
@@ -36,16 +36,16 @@
 
 			<div class="form-group">
 				<label class="control-label col-sm-2" for="pwd"
-					th:text="#{oferta.precio}">Precio:</label>
+					th:text="#{oferta.precio}"></label>
 				<div class="col-sm-10">
 					<input type="number" class="form-control" name="precio"
-						placeholder="10 ï¿½" required="true" /> <span class="text-danger"
+						placeholder="10 €" required="true" /> <span class="text-danger"
 						th:if="${#fields.hasErrors('precio')}" th:errors="*{precio}" />
 				</div>
 			</div>
 			<div class="form-group">
 				<div class="col-sm-offset-2 col-sm-10">
-					<button type="submit" class="btn btn-primary">Enviar</button>
+					<button type="submit" class="btn btn-primary" th:text="#{send}"></button>
 				</div>
 			</div>
 		</form>
