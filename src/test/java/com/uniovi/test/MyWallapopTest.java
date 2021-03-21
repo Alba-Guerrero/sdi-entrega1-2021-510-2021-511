@@ -25,6 +25,7 @@ import com.uniovi.services.RolesService;
 import com.uniovi.services.UsersService;
 import com.uniovi.test.pageobjects.PO_HomeView;
 import com.uniovi.test.pageobjects.PO_LoginView;
+import com.uniovi.test.pageobjects.PO_Properties;
 import com.uniovi.test.pageobjects.PO_RegisterView;
 import com.uniovi.test.pageobjects.PO_View;
 
@@ -78,7 +79,7 @@ public class MyWallapopTest {
 		
 		Oferta o1_1 = new Oferta(1L, 50.30, "Falda", "Falda larga talla L", user1);
 		Oferta o1_2 = new Oferta(2L, 5, "Cuchara", "Cuchara de acero inoxidable", user1);
-		Oferta o1_3 = new Oferta(3L, 100, "Monitor LED", "Monitor LED de 24'", user1);
+		Oferta o1_3 = new Oferta(3L, 100, "Monitor LED", "Monitor LED de 24 pulgadas", user1);
 		Oferta o1_4 = new Oferta(4L, 20, "Microfono", "Microfono modelo AXD15", user1);
 		
 		User user2 = new User("Ana", "Gonzalez", "ana@email.com", "123456", "123456");
@@ -172,12 +173,6 @@ public class MyWallapopTest {
 		PO_View.checkElement(driver, "span", email);
 	}
 	
-	public void signup(String email, String nombre, String apellidos, String pass1, String pass2) {
-		PO_HomeView.clickOption(driver, "signup", "class", "btn btn-primary");
-		PO_RegisterView.fillForm(driver, email, nombre, apellidos, pass1, pass2);
-		PO_View.checkElement(driver, "text", "Ofertas");
-	}
-	
 	public void fillFormOferta(String descripcion, String detalle, int precio) {
 		WebElement dni = driver.findElement(By.name("descripcion"));
 		dni.click();
@@ -201,7 +196,9 @@ public class MyWallapopTest {
 	 */
 	@Test
 	public void Prueba1() {
-		signup("Josefo@email.com", "Josefo", "Perez", "123456", "123456");
+		PO_HomeView.clickOption(driver, "signup", "class", "btn btn-primary");
+		PO_RegisterView.fillForm(driver, "Josefo@email.com", "Josefo", "Perez", "123456", "123456");
+		PO_View.checkElement(driver, "span", "Josefo@email.com");
 	}
 
 	/**
@@ -209,7 +206,9 @@ public class MyWallapopTest {
 	 */
 	@Test
 	public void Prueba2() {
-		signup("", "", "", "123456", "123456");
+		PO_HomeView.clickOption(driver, "signup", "class", "btn btn-primary");
+		PO_RegisterView.fillForm(driver, "", "", "", "123456", "123456");
+		PO_View.checkElement(driver, "text", "Registrarte");
 	}
 
 	/**
@@ -217,7 +216,10 @@ public class MyWallapopTest {
 	 */
 	@Test
 	public void Prueba3() {
-		signup("Antonio@email.com", "Antonio", "Suarez", "1234567", "123456");
+		PO_HomeView.clickOption(driver, "signup", "class", "btn btn-primary");
+		PO_RegisterView.fillForm(driver, "Antonio@email.com", "Antonio", "Suarez", "1234567", "123456");
+		PO_RegisterView.checkKey(driver, "Error.passwordConfirm.coincidence",
+				PO_Properties.getSPANISH() );
 	}
 
 	/**
@@ -225,7 +227,10 @@ public class MyWallapopTest {
 	 */
 	@Test
 	public void Prueba4() {
-		signup("pedro@email.com", "Pedro", "Perez", "123456", "123456");
+		PO_HomeView.clickOption(driver, "signup", "class", "btn btn-primary");
+		PO_RegisterView.fillForm(driver, "pedro@email.com", "Pedro", "Perez", "123456", "123456");
+		PO_RegisterView.checkKey(driver, "Error.email.coincidence",
+				PO_Properties.getSPANISH() );
 	}
 
 	/**
@@ -249,7 +254,9 @@ public class MyWallapopTest {
 	 */
 	@Test
 	public void Prueba7() {
-		login("", "");
+		PO_HomeView.clickOption(driver, "login", "class", "btn btn-primary");
+		PO_LoginView.fillForm(driver, "" , "" );
+		PO_View.checkElement(driver, "text", "Identifícate");
 	}
 	
 	/**
@@ -257,7 +264,9 @@ public class MyWallapopTest {
 	 */
 	@Test
 	public void Prueba8() {
-		login("pedro@email.com", "123456789");
+		PO_HomeView.clickOption(driver, "login", "class", "btn btn-primary");
+		PO_LoginView.fillForm(driver, "pedro@email.com" , "123456789" );
+		PO_View.checkElement(driver, "h2", "Identifícate");
 	}
 	
 	/**
@@ -265,7 +274,9 @@ public class MyWallapopTest {
 	 */
 	@Test
 	public void Prueba9() {
-		login("pepe@email.com", "123456");
+		PO_HomeView.clickOption(driver, "login", "class", "btn btn-primary");
+		PO_LoginView.fillForm(driver, "pepe@email.com" , "123456" );
+		PO_View.checkElement(driver, "h2", "Identifícate");
 	}
 
 	/**
@@ -436,7 +447,7 @@ public class MyWallapopTest {
 		
 		PO_View.checkElement(driver, "text", "Falda larga talla L");
 		PO_View.checkElement(driver, "text", "Cuchara de acero inoxidable");
-		PO_View.checkElement(driver, "text", "Monitor LED de 24'");
+		PO_View.checkElement(driver, "text", "Monitor LED de 24 pulgadas");
 		PO_View.checkElement(driver, "text", "Microfono modelo AXD15");
 	}
 	

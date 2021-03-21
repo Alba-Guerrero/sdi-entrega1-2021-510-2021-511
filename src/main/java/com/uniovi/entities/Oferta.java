@@ -24,8 +24,6 @@ public class Oferta {
 	@JoinColumn(name = "user_id")
 	private User user;
 
-
-
 	public double getPrecio() {
 		return precio;
 	}
