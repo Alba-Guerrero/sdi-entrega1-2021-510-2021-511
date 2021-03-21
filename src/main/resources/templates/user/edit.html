@@ -4,26 +4,8 @@
 <body>
 
 	<!-- Barra de Navegación superior -->
-	<nav class="navbar navbar-inverse">
-		<div class="container-fluid">
-			<div class="navbar-header">
-				<button type="button" class="navbar-toggle" data-toggle="collapse"
-					data-target="#myNavbar">
-					<span class="icon-bar"></span> <span class="icon-bar"></span> <span
-						class="icon-bar"></span>
-				</button>
-				<img src="/img/student-48.png" alt="logo" />
-			</div>
-
-			<ul class="nav navbar-nav navbar-right">
-				<li><a href="/registrarse" th:text="#{signup.message}"> <span
-						class="glyphicon glyphicon-user"></span></span> Registrate</a></li>
-				<li><a href="/identificarse" th:text="#{login.message}"> <span
-						class="glyphicon glyphicon-user"></span></span> Identifícate</a></li>
-			</ul>
-		</div>
-		</div>
-	</nav>
+	<nav th:replace="fragments/nav"/>
+	
 	<div class="container">
 		<h2 th:text="#{user.edit}"> </h2>
 		<form class="form-horizontal" method="post"
@@ -74,7 +56,7 @@
 		</form>
 	</div>
 
-
+<footer  th:replace="fragments/footer" />
 
 </body>
 
