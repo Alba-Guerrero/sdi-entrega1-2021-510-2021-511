@@ -14,15 +14,13 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
 
 import com.uniovi.entities.*;
 import com.uniovi.services.OfertaService;
-import com.uniovi.services.RolesService;
-import com.uniovi.services.SecurityService;
+
 import com.uniovi.services.UsersService;
 import com.uniovi.validators.OfertaValidator;
-import com.uniovi.validators.UserValidator;
 
 @Controller
 public class OfertaController {
@@ -64,6 +62,7 @@ public class OfertaController {
 	public String getListComprados(Model model, Principal principal) {
 
 		model.addAttribute("ofertasBuy", ofertasService.getOfertasComprador(principal.getName()));
+		httpsession.setAttribute("saldo",usersService.getUserByEmail(principal.getName()).getDinero());
 		return "oferta/buyList";
 	}
 
@@ -90,8 +89,10 @@ public class OfertaController {
 		if(ofertasService.checkSaldo(principal.getName(), ofertasService.getOferta(id).getPrecio())){//Si tiene saldo
 			ofertasService.updateSaldo(ofertasService.getOferta(id).getPrecio(), principal.getName());
 			ofertasService.setComprado(principal.getName(),id);
-			httpsession.setAttribute("saldo",usersService.getUserByEmail(principal.getName()).getDinero());
 			modelo.addAttribute("ofertasBuy", ofertasService.getOfertasComprador(principal.getName()));
+			httpsession.setAttribute("saldo",usersService.getUserByEmail(principal.getName()).getDinero());
+			
+			
 			
 			return "oferta/buyList";
 		}
