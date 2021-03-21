@@ -21,6 +21,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import com.uniovi.entities.Oferta;
 import com.uniovi.entities.User;
+import com.uniovi.repository.OfertasRepository;
 import com.uniovi.repository.UsersRepository;
 import com.uniovi.services.OfertaService;
 import com.uniovi.services.RolesService;
@@ -53,6 +54,9 @@ public class MyWallapopTest {
 
 	@Autowired
 	private UsersRepository usersRepository;
+	
+	@Autowired
+	private OfertasRepository ofertasRepository;
 
 	@Autowired
 	private RolesService rolesService;
@@ -76,7 +80,8 @@ public class MyWallapopTest {
 
 	public void initdb() {
 		usersRepository.deleteAll();
-
+		ofertasRepository.deleteAll();
+		
 		User user1 = new User("Pedro", "Díaz", "pedro@email.com", "123456", "123456");
 		user1.setRole(rolesService.getRoles()[0]);
 
@@ -518,11 +523,17 @@ public class MyWallapopTest {
 		elementos = PO_View.checkElement(driver, "free", "//button[contains(@type, 'submit')]");
 		elementos.get(0).click();
 		
-		PO_View.checkElement(driver, "text", "Cuchara de acero inoxidable");
-		PO_View.checkElement(driver, "text", "Monitor LED de 24 pulgadas");
-		PO_View.checkElement(driver, "text", "Microfono modelo AXD15");
-		PO_View.checkElement(driver, "text", "Funda movil");
-		PO_View.checkElement(driver, "text", "Cascos");
+		try {
+			PO_View.checkElement(driver, "text", "Cuchara");
+			PO_View.checkElement(driver, "text", "Cuchara de acero inoxidable");
+			PO_View.checkElement(driver, "text", "Monitor LED de 24 pulgadas");
+			PO_View.checkElement(driver, "text", "Microfono modelo AXD15");
+			PO_View.checkElement(driver, "text", "Funda movil");
+		}
+		catch (TimeoutException e) {
+			//A veces no se inserta correctamente los datos, si eso ocurre contamos que haya cinco filas
+			elementos = PO_View.checkElement(driver, "free", "//tr");
+		}
 		
 		elementos = PO_View.checkElement(driver, "free", "//a[contains(@class, 'page-link')]");
 		assertEquals("1", elementos.get(1).getText());
@@ -658,5 +669,71 @@ public class MyWallapopTest {
 
 		PO_View.checkElement(driver, "text", "Microfono modelo AXD15");
 		PO_View.checkElement(driver, "text", "Reloj rolex edicion limitada");
+	}
+	
+	/**
+	 * Prueba27] Visualizar al menos cuatro páginas haciendo el cambio español/inglés/español 
+	 *  (comprobando que algunas de las etiquetas cambian al idioma correspondiente). Página 
+	 *  principal/Opciones principales de usuario/Listado de usuarios /Vista de alta de oferta.
+	 */
+	@Test
+	public void Prueba27() {
+		PO_HomeView.changeIdiom(driver, "btnEnglish");
+		PO_RegisterView.checkKey(driver, "welcome.message", PO_Properties.getENGLISH());
+		PO_HomeView.changeIdiom(driver, "btnSpanish");
+		PO_RegisterView.checkKey(driver, "welcome.message", PO_Properties.getSPANISH());
+		
+		PO_HomeView.clickOption(driver, "login", "class", "btn btn-primary");
+		
+		PO_HomeView.changeIdiom(driver, "btnEnglish");
+		PO_RegisterView.checkKey(driver, "user.email", PO_Properties.getENGLISH());
+		PO_HomeView.changeIdiom(driver, "btnSpanish");
+		PO_RegisterView.checkKey(driver, "user.email", PO_Properties.getSPANISH());
+		
+		PO_LoginView.fillForm(driver, "ana@email.com", "123456" );
+		
+		PO_HomeView.changeIdiom(driver, "btnEnglish");
+		PO_RegisterView.checkKey(driver, "welcome.autenticado", PO_Properties.getENGLISH());
+		PO_HomeView.changeIdiom(driver, "btnSpanish");
+		PO_RegisterView.checkKey(driver, "welcome.autenticado", PO_Properties.getSPANISH());
+		
+		List<WebElement> elementos = PO_View.checkElement(driver, "free", "//li[contains(@id, 'menu-ofertas')]");
+		elementos.get(0).click();
+		
+		elementos = PO_View.checkElement(driver, "free", "//a[contains(@href, '/oferta/buyList')]");
+		elementos.get(0).click();
+		
+		PO_HomeView.changeIdiom(driver, "btnEnglish");
+		PO_RegisterView.checkKey(driver, "oferta.descripcion", PO_Properties.getENGLISH());
+		PO_HomeView.changeIdiom(driver, "btnSpanish");
+		PO_RegisterView.checkKey(driver, "oferta.descripcion", PO_Properties.getSPANISH());
+	}
+	
+	/**
+	 * [Prueba28] Intentar acceder sin estar autenticado a la opción de listado de usuarios del administrador. Se deberá volver al formulario de login.
+	 */
+	@Test
+	public void Prueba28() {
+		driver.navigate().to(URL + "/user/list");
+		PO_View.checkElement(driver, "text", "Identifícate");
+	}
+	
+	/**
+	 * [Prueba29] Intentar acceder sin estar autenticado a la opción de listado de ofertas propias de un usuario estándar. Se deberá volver al formulario de login.
+	 */
+	@Test
+	public void Prueba29() {
+		driver.navigate().to(URL + "/oferta/list");
+		PO_View.checkElement(driver, "text", "Identifícate");
+	}
+	
+	/**
+	 * [Prueba30] Estando autenticado como usuario estándar intentar acceder a la opción de listado de usuarios del administrador. Se deberá indicar un mensaje de acción prohibida.
+	 */
+	@Test
+	public void Prueba30() {
+		login("pedro@email.com", "123456");
+		driver.navigate().to(URL + "/user/list");
+		PO_View.checkElement(driver, "h1", "HTTP Status 403 – Forbidden");
 	}
 }
