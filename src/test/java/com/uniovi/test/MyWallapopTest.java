@@ -166,10 +166,10 @@ public class MyWallapopTest {
 		driver.quit();
 	}
 
-	public void login(String email, String pass, String iden) {
+	public void login(String email, String pass) {
 		PO_HomeView.clickOption(driver, "login", "class", "btn btn-primary");
 		PO_LoginView.fillForm(driver, email , pass );
-		PO_View.checkElement(driver, "text", iden);
+		PO_View.checkElement(driver, "span", email);
 	}
 	
 	public void signup(String email, String nombre, String apellidos, String pass1, String pass2) {
@@ -233,7 +233,7 @@ public class MyWallapopTest {
 	 */
 	@Test
 	public void Prueba5() {
-		login("admin@email.com" , "admin", "Gestion de usuarios");
+		login("admin@email.com", "admin");
 	}
 	
 	/**
@@ -241,7 +241,7 @@ public class MyWallapopTest {
 	 */
 	@Test
 	public void Prueba6() {
-		login("pedro@email.com" , "123456", "Ofertas");
+		login("pedro@email.com", "123456");
 	}
 	
 	/**
@@ -249,7 +249,7 @@ public class MyWallapopTest {
 	 */
 	@Test
 	public void Prueba7() {
-		login("" , "" , "Identificate");
+		login("", "");
 	}
 	
 	/**
@@ -257,7 +257,7 @@ public class MyWallapopTest {
 	 */
 	@Test
 	public void Prueba8() {
-		login("pedro@email.com" , "123456789", "Identificate" );
+		login("pedro@email.com", "123456789");
 	}
 	
 	/**
@@ -265,7 +265,7 @@ public class MyWallapopTest {
 	 */
 	@Test
 	public void Prueba9() {
-		login("pepe@email.com" , "123456", "Identificate" );
+		login("pepe@email.com", "123456");
 	}
 
 	/**
@@ -273,10 +273,10 @@ public class MyWallapopTest {
 	 */
 	@Test
 	public void Prueba10() {
-		login("pedro@email.com" , "123456", "Ofertas" );
+		login("pedro@email.com", "123456");
 		
 		PO_HomeView.clickOption(driver, "logout", "class", "btn btn-primary");
-		PO_View.checkElement(driver, "text", "Identificate");
+		PO_View.checkElement(driver, "text", "Identifícate");
 	}
 	
 	/**
@@ -292,7 +292,7 @@ public class MyWallapopTest {
 	 */
 	@Test
 	public void Prueba12() {
-		login("admin@email.com" , "admin", "Gestion de usuarios" );
+		login("admin@email.com", "admin");
 		
 		List<WebElement> elementos = PO_View.checkElement(driver, "free", "//li[contains(@id, 'users-menu')]");
 		elementos.get(0).click();
@@ -312,7 +312,7 @@ public class MyWallapopTest {
 	 */
 	@Test
 	public void Prueba13() {
-		login("admin@email.com" , "admin", "Gestion de usuarios" );
+		login("admin@email.com", "admin");
 		
 		List<WebElement> elementos = PO_View.checkElement(driver, "free", "//li[contains(@id, 'users-menu')]");
 		elementos.get(0).click();
@@ -338,7 +338,7 @@ public class MyWallapopTest {
 	 */
 	@Test
 	public void Prueba14() {
-		login("admin@email.com" , "admin", "Gestion de usuarios" );
+		login("admin@email.com", "admin");
 		
 		List<WebElement> elementos = PO_View.checkElement(driver, "free", "//li[contains(@id, 'users-menu')]");
 		elementos.get(0).click();
@@ -364,7 +364,7 @@ public class MyWallapopTest {
 	 */
 	@Test
 	public void Prueba15() {
-		login("admin@email.com" , "admin", "Gestion de usuarios" );
+		login("admin@email.com", "admin");
 		
 		List<WebElement> elementos = PO_View.checkElement(driver, "free", "//li[contains(@id, 'users-menu')]");
 		elementos.get(0).click();
@@ -393,7 +393,7 @@ public class MyWallapopTest {
 	 */
 	@Test
 	public void Prueba16() {
-		login("pedro@email.com" , "123456", "Ofertas" );
+		login("pedro@email.com", "123456");
 		
 		List<WebElement> elementos = PO_View.checkElement(driver, "free", "//li[contains(@id, 'menu-ofertas')]");
 		elementos.get(0).click();
@@ -410,7 +410,7 @@ public class MyWallapopTest {
 	 */
 	@Test
 	public void Prueba17() {
-		login("pedro@email.com" , "123456", "Ofertas" );
+		login("pedro@email.com", "123456");
 		
 		List<WebElement> elementos = PO_View.checkElement(driver, "free", "//li[contains(@id, 'menu-ofertas')]");
 		elementos.get(0).click();
@@ -426,7 +426,7 @@ public class MyWallapopTest {
 	 */
 	@Test
 	public void Prueba18() {
-		login("pedro@email.com" , "123456", "Ofertas" );
+		login("pedro@email.com", "123456");
 		
 		List<WebElement> elementos = PO_View.checkElement(driver, "free", "//li[contains(@id, 'menu-ofertas')]");
 		elementos.get(0).click();
