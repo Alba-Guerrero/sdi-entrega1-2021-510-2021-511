@@ -1,14 +1,7 @@
 <!-- nav.html -->
 <nav class="navbar navbar-inverse">
 	<div class="container-fluid">
-		<div class="navbar-header">
-			<button type="button" class="navbar-toggle" data-toggle="collapse"
-				data-target="#myNavbar">
-				<span class="icon-bar"></span> <span class="icon-bar"></span> <span
-					class="icon-bar"></span>
-			</button>
-			<img src="/img/student-48.png" alt="logo" />
-		</div>
+		
 		<div class="collapse navbar-collapse" id="myNavbar">
 			<ul class="nav navbar-nav" sec:authorize="isAuthenticated()">
 				<li><a href="/">Home</a></li>
@@ -68,7 +61,7 @@
 				<li id="menu" class="dropdown" sec:authorize="hasRole('ROLE_USER')">
 					
 					<ul class="user-info">
-						<li th:text="${#httpSession.getAttribute('email')}"></a></li>
+						<li  th:text="${#httpSession.getAttribute('email')}"></a></li>
 						<li th:text="${#httpSession.getAttribute('saldo')}"></a></li>
 						
 					</ul></li>

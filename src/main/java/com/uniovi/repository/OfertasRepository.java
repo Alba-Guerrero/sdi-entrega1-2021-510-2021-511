@@ -19,8 +19,11 @@ public interface OfertasRepository extends CrudRepository<Oferta, Long>{
 	@Query("SELECT o FROM Oferta o WHERE o.user.id = ?1")
 	List<Oferta> searchById(long id);
 	
-	@Query("SELECT o FROM Oferta o WHERE (LOWER (o.descripcion)) LIKE LOWER(?1)")
-	Page<Oferta> searchByDescription(Pageable pageable, String descripcion);
+	@Query("SELECT o FROM Oferta o WHERE o.user.id != ?1")
+	List<Oferta> searchByDistintoId(long id);
+	
+	@Query("SELECT o FROM Oferta o WHERE (LOWER (o.descripcion)) LIKE LOWER(?1) and o.user.email !=?2")
+	Page<Oferta> searchByDescription(Pageable pageable, String descripcion,String email);
 
 	
 	@Modifying
