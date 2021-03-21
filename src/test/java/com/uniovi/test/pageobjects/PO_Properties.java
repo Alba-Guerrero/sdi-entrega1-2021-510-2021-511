@@ -1,11 +1,7 @@
 package com.uniovi.test.pageobjects;
 
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.util.Locale;
-import java.util.Properties;
 import java.util.ResourceBundle;
 
 public class PO_Properties {
@@ -22,6 +18,7 @@ public class PO_Properties {
 	static int ENGLISH = 1;	
 	static Locale[] idioms = new Locale[] {new Locale("ES"), new Locale("EN")};
 	//static Properties p = new Properties();
+	@SuppressWarnings("static-access")
 	public PO_Properties(String Path) //throws FileNotFoundException, IOException 
 	{
 		this.Path = Path;
