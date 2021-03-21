@@ -21,7 +21,7 @@ public class UserValidator implements Validator {
 	@Override
 	public void validate(Object target, Errors errors) {
 		User user = (User) target;
-		User userS=userService.getUserByEmail(user.getEmail());
+	//	User userS=userService.getUserByEmail(user.getEmail());
 
 		//ValidationUtils.rejectIfEmptyOrWhitespace(errors, "score", "Error");
 		if (user.getEmail().length() < 2 || user.getEmail().length() > 25) {
