@@ -46,10 +46,13 @@ public class UserValidator implements Validator {
 			errors.rejectValue("password", "Error.password.length");
 		}
 		
+		if (user.getPassword().isEmpty() || user.getPassword() == null) {
+			errors.rejectValue("password", "Error.password.vacia");
+		}
+		
 		if (!user.getPasswordConfirm().equals(user.getPassword())) {
 			errors.rejectValue("passwordConfirm", "Error.passwordConfirm.coincidence");
 		}
-
 	}
 
 }

@@ -1,14 +1,13 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
+
 <head th:replace="fragments/head" />
+
 <body>
 	<nav th:replace="fragments/nav" />
 	<div class="container" style="text-align: center">
 		<h2 th:text="#{welcome.message}"></h2>
-		<p th:text="#{welcome.autenticado}">
-			<span sec:authentication="principal.username" th:inline="text"></span>
-		</p>
-
+	</div>
 	<footer th:replace="fragments/footer" />
 </body>
 </html>

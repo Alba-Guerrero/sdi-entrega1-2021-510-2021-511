@@ -42,6 +42,8 @@ public class Oferta {
 	}
 
 	public void setEmailComprador(String emailComprador) {
+		if(!isComprada())
+			setComprada(true);
 		this.emailComprador = emailComprador;
 	}
 
