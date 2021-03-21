@@ -5,6 +5,8 @@ import java.util.LinkedList;
 
 import javax.servlet.http.HttpSession;
 
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.*;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
@@ -24,6 +26,7 @@ import com.uniovi.validators.OfertaValidator;
 
 @Controller
 public class OfertaController {
+	private static final Logger logger = LogManager.getLogger(OfertaController.class);
 
 	@Autowired
 	private OfertaService ofertasService ;
@@ -78,7 +81,7 @@ public class OfertaController {
 		String email = principal.getName();
 		User user = usersService.getUserByEmail(email);
 		oferta.setUser(user);
-		
+		logger.info(String.format("El usuario con email %s ha añadido correctamente una oferta",email));
 		ofertasService.addOferta(oferta);
 		return "redirect:/oferta/list";
 
@@ -93,13 +96,13 @@ public class OfertaController {
 			modelo.addAttribute("ofertasBuy", ofertasService.getOfertasComprador(principal.getName()));
 			httpsession.setAttribute("saldo",usersService.getUserByEmail(principal.getName()).getDinero());
 			
-			
+			logger.info(String.format("El usuario con el email %s ha comprado la oferta", principal.getName()));
 			
 			return "redirect:/oferta/buyList";
 		}
 		else
 			modelo.addAttribute("error", error);
-		
+		logger.info(String.format("El usuario con el email %s no tiene saldo para comprar la oferta", principal.getName()));
 			
 		return "redirect:/oferta/find";
 
@@ -126,6 +129,7 @@ public class OfertaController {
 	@RequestMapping("/oferta/delete/{id}")
 	public String delete(@PathVariable Long id) {
 		ofertasService.deleteOferta(id);
+		logger.info(String.format("Se ha borrado la oferta con id %d",id ));
 		return "redirect:/oferta/list";
 	}
 

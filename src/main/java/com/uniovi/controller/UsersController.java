@@ -5,6 +5,8 @@ import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.*;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -19,6 +21,7 @@ import com.uniovi.validators.UserValidator;
 
 @Controller
 public class UsersController {
+	private static final Logger logger = LogManager.getLogger(UsersController.class);
 
 	@Autowired
 	private RolesService rolesService;
@@ -49,6 +52,7 @@ public class UsersController {
 		user.setRole(rolesService.getRoles()[0]);
 
 		usersService.addUser(user);
+		logger.info(String.format("Se ha añadido un usuario con email %s",user.getEmail()));
 		
 		//Al registrarse inicia sesion automaticamente con el email y la contraseña
 		securityService.autoLogin(user.getEmail(), user.getPasswordConfirm());
@@ -88,6 +92,7 @@ public class UsersController {
 
 			return "user/add";
 		}
+		logger.info(String.format("Se ha añadido correctamente un usuario con email %s ",user.getEmail()));
 		usersService.addUser(user);
 		return "redirect:/user/list";
 
@@ -113,6 +118,7 @@ public class UsersController {
 	@RequestMapping("/user/delete/{id}")
 	public String delete(@PathVariable Long id) {
 		usersService.deleteUser(id);
+		logger.info(String.format("Se ha elimiando correctamente un usuario con email %s ",usersService.getUser(id).getEmail()));
 		return "redirect:/user/list";
 	}
 
