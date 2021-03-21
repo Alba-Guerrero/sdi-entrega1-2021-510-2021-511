@@ -9,20 +9,20 @@
 
 
 	<div class="container">
-		<h2 th:text="${user.details}"> </h2>
+		<h2 th:text="#{user.details}"> </h2>
 		
 		<div class="panel panel-default">
-			<div class="panel-heading" th:text="${user.nombre}">Nombre</div>
+			<div class="panel-heading" th:text="#{user.nombre}">Nombre</div>
 			<div class="panel-body" >
 				</div>
 		</div>
 		<div class="panel panel-default">
-			<div class="panel-heading" th:text="${user.apellido}"></div>
+			<div class="panel-heading" th:text="#{user.apellido}"></div>
 			<div class="panel-body" ></div>
 		</div>
 		
 		<div class="panel panel-default">
-			<div class="panel-heading" th:text="${user.email}"></div>
+			<div class="panel-heading" th:text="#{user.email}"></div>
 			<div class="panel-body" ></div>
 		</div>
 		<footer  th:replace="fragments/footer" />

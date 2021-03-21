@@ -15,9 +15,9 @@
 				<thead>
 					<tr>
 						<th></th>
-						<th th:text="${user.nombre}"></th>
-						<th th:text="${user.apellido}"></th>
-						<th th:text="${user.email}"></th>
+						<th th:text="#{user.nombre}"></th>
+						<th th:text="#{user.apellido}"></th>
+						<th th:text="#{user.email}"></th>
 						<th class="col-md-1"></th>
 						<th class="col-md-1"></th>
 						<th class="col-md-1"></th>
@@ -31,7 +31,7 @@
 						<td th:text="${user.nombre}">Nombre del alumno</td>
 						<td th:text="${user.apellido}">Apellidos del usuario</td>
 						<td th:text="${user.email}">ejmplo@ejemplo.com</td>
-						<td><a th:href="${'/user/details/' + user.id}" th:text="${oferta.detalle}">detalles</a></td>
+						<td><a th:href="${'/user/details/' + user.id}" th:text="#{oferta.detalle}">detalles</a></td>
 					</tr>
 				</tbody>
 	
