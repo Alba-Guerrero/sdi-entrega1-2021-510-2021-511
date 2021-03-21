@@ -98,20 +98,21 @@ public class MyWallapopTest {
 		Oferta o3_1 = new Oferta(8L, 500, "Ordenador", "Ordenador gaming I7...", user3);
 		Oferta o3_2 = new Oferta(9L, 150, "Tarjeta grafica", "Tarjeta grafica gtx 1660", user3);
 		Oferta o3_3 = new Oferta(10L, 57.96, "Disco duro", "Disco duro ssd 120gb", user3);
+		Oferta o3_4 = new Oferta(11L, 100, "Vestido", "Vestido de una pieza", user3);
 
 		User user4 = new User("Maria", "Sanchez", "maria@email.com", "123456", "123456");
 		user4.setRole(rolesService.getRoles()[0]);
 
-		Oferta o4_1 = new Oferta(11L, 20, "Sudadera", "Sudadera MaxPower talla S hombre", user4);
-		Oferta o4_2 = new Oferta(12L, 15.99, "Comida para perro", "Comida para perros grande mas 10kg", user4);
-		Oferta o4_3 = new Oferta(13L, 2.50, "Cabe hdmi", "Cable hdmi longitud 120 cm", user4);
+		Oferta o4_1 = new Oferta(12L, 20, "Sudadera", "Sudadera MaxPower talla S hombre", user4);
+		Oferta o4_2 = new Oferta(13L, 15.99, "Comida para perro", "Comida para perros grande mas 10kg", user4);
+		Oferta o4_3 = new Oferta(14L, 2.50, "Cabe hdmi", "Cable hdmi longitud 120 cm", user4);
 
 		User user5 = new User("Andrea", "Garcia", "andrea@email.com", "123456", "123456");
 		user5.setRole(rolesService.getRoles()[0]);
 
-		Oferta o5_1 = new Oferta(11L, 2000, "Reloj", "Reloj rolex edicion limitada", user5);
-		Oferta o5_2 = new Oferta(12L, 0.50, "Chicles", "Paquete x10 chicles", user5);
-		Oferta o5_3 = new Oferta(13L, 12.84, "Camiseta", "Camiseta deporte M mujer", user5);
+		Oferta o5_1 = new Oferta(15L, 2000, "Reloj", "Reloj rolex edicion limitada", user5);
+		Oferta o5_2 = new Oferta(16L, 0.50, "Chicles", "Paquete x10 chicles", user5);
+		Oferta o5_3 = new Oferta(17L, 12.84, "Camiseta", "Camiseta deporte M mujer", user5);
 
 		User user6 = new User("Admin", "Admin", "admin@email.com", "admin", "admin");
 		user6.setRole(rolesService.getRoles()[1]);
@@ -125,10 +126,10 @@ public class MyWallapopTest {
 		o3_3.setEmailComprador(user1.getEmail());
 		o3_1.setEmailComprador(user5.getEmail());
 
-		o4_3.setEmailComprador(user3.getEmail());
+		o4_3.setEmailComprador(user5.getEmail());
 		o4_2.setEmailComprador(user3.getEmail());
 
-		o5_1.setEmailComprador(user1.getEmail());
+		o5_1.setEmailComprador(user2.getEmail());
 		o5_3.setEmailComprador(user3.getEmail());
 
 		usersService.addUser(user1);
@@ -150,7 +151,8 @@ public class MyWallapopTest {
 		ofertaService.addOferta(o3_1);
 		ofertaService.addOferta(o3_2);
 		ofertaService.addOferta(o3_3);
-
+		ofertaService.addOferta(o3_4);
+		
 		ofertaService.addOferta(o4_1);
 		ofertaService.addOferta(o4_2);
 		ofertaService.addOferta(o4_3);
@@ -516,11 +518,11 @@ public class MyWallapopTest {
 		elementos = PO_View.checkElement(driver, "free", "//button[contains(@type, 'submit')]");
 		elementos.get(0).click();
 		
-		PO_View.checkElement(driver, "text", "Falda larga talla L");
 		PO_View.checkElement(driver, "text", "Cuchara de acero inoxidable");
 		PO_View.checkElement(driver, "text", "Monitor LED de 24 pulgadas");
 		PO_View.checkElement(driver, "text", "Microfono modelo AXD15");
 		PO_View.checkElement(driver, "text", "Funda movil");
+		PO_View.checkElement(driver, "text", "Cascos");
 		
 		elementos = PO_View.checkElement(driver, "free", "//a[contains(@class, 'page-link')]");
 		assertEquals("1", elementos.get(1).getText());
@@ -573,17 +575,88 @@ public class MyWallapopTest {
 		WebElement text = driver.findElement(By.name("searchText"));
 		text.click();
 		text.clear();
-		text.sendKeys("wewewewewewe");
+		text.sendKeys("Chicles");
 		
 		elementos = PO_View.checkElement(driver, "free", "//button[contains(@type, 'submit')]");
 		elementos.get(0).click();
 		
-		try {
-			elementos = PO_View.checkElement(driver, "free", "//td");
-			assertTrue(false);
-		} catch (TimeoutException e) { assertTrue(true); }
+		elementos = PO_View.checkElement(driver, "free", "//a[contains(@href, '/oferta/buyList/')]");
+		elementos.get(0).click();
 		
-		elementos = PO_View.checkElement(driver, "free", "//a[contains(@class, 'page-link')]");
-		assertEquals("1", elementos.get(1).getText());
+		elementos = PO_View.checkElement(driver, "free", "//li[contains(@id, 'saldo')]");
+		assertTrue(Double.valueOf(elementos.get(0).getText()) > 0 && Double.valueOf(elementos.get(0).getText()) < 100);
+	}
+	
+	/**
+	 * [Prueba24] Sobre una búsqueda determinada (a elección del desarrollador), comprar una oferta que deja un saldo 0 en el contador del comprador. 
+	 *  Comprobar que el contador se actualiza correctamente en la vista del comprador. 
+	 */
+	@Test
+	public void Prueba24() {
+		login("pedro@email.com", "123456");
+
+		List<WebElement> elementos = PO_View.checkElement(driver, "free", "//li[contains(@id, 'menu-ofertas')]");
+		elementos.get(0).click();
+
+		elementos = PO_View.checkElement(driver, "free", "//a[contains(@href, '/oferta/find')]");
+		elementos.get(0).click();
+
+		WebElement text = driver.findElement(By.name("searchText"));
+		text.click();
+		text.clear();
+		text.sendKeys("Vestido");
+		
+		elementos = PO_View.checkElement(driver, "free", "//button[contains(@type, 'submit')]");
+		elementos.get(0).click();
+		
+		elementos = PO_View.checkElement(driver, "free", "//a[contains(@href, '/oferta/buyList/')]");
+		elementos.get(0).click();
+		
+		elementos = PO_View.checkElement(driver, "free", "//li[contains(@id, 'saldo')]");
+		System.out.println(elementos.get(0).getText());
+		assertTrue(Double.valueOf(elementos.get(0).getText()) == 0);
+	}
+	
+	/**
+	 * [Prueba25] Sobre una búsqueda determinada (a elección del desarrollador), intentar comprar una oferta que esté por encima de saldo disponible del comprador. 
+	 *  Y comprobar que se muestra el mensaje de saldo no suficiente.
+	 */
+	@Test
+	public void Prueba25() {
+		login("pedro@email.com", "123456");
+
+		List<WebElement> elementos = PO_View.checkElement(driver, "free", "//li[contains(@id, 'menu-ofertas')]");
+		elementos.get(0).click();
+
+		elementos = PO_View.checkElement(driver, "free", "//a[contains(@href, '/oferta/find')]");
+		elementos.get(0).click();
+
+		WebElement text = driver.findElement(By.name("searchText"));
+		text.click();
+		text.clear();
+		text.sendKeys("Tarjeta");
+		
+		elementos = PO_View.checkElement(driver, "free", "//button[contains(@type, 'submit')]");
+		elementos.get(0).click();
+		
+		elementos = PO_View.checkElement(driver, "free", "//td[contains(@id, 'saldoInsuficiente')]");
+	}
+	
+	/**
+	 * [Prueba26] Ir a la opción de ofertas compradas del usuario y mostrar la lista. 
+	 *  Comprobar que aparecen las ofertas que deben aparecer.
+	 */
+	@Test
+	public void Prueba26() {
+		login("ana@email.com", "123456");
+
+		List<WebElement> elementos = PO_View.checkElement(driver, "free", "//li[contains(@id, 'menu-ofertas')]");
+		elementos.get(0).click();
+
+		elementos = PO_View.checkElement(driver, "free", "//a[contains(@href, '/oferta/buyList')]");
+		elementos.get(0).click();
+
+		PO_View.checkElement(driver, "text", "Microfono modelo AXD15");
+		PO_View.checkElement(driver, "text", "Reloj rolex edicion limitada");
 	}
 }
